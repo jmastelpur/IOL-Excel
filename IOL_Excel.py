@@ -19,6 +19,7 @@ def extract_data(text):
 
     # Normalize the text to make parsing easier
     fullpage = text.replace('\n', ' ')
+    print(fullpage)
     # Find patient name and ID
     match_name = re.search(r'Patient ([A-Z]+, [A-Z]+)', fullpage)
     if match_name:
@@ -112,6 +113,7 @@ def process_pdfs(folder):
             try:
                 with pdfplumber.open(path) as pdf:
                     page_text = pdf.pages[0].extract_text(x_tolerance=3, x_tolerance_ratio=None, y_tolerance=3, layout=False, x_density=7.25, y_density=13, line_dir_render=None, char_dir_render=None)
+                    print(page_text)
                     values = extract_data(page_text)
                     extracted_data.append(values)
                     print(f"Extracted data from {filename}")
